@@ -1,0 +1,19 @@
+name: File Change in Consumer Folder
+
+on:
+  push:
+    paths:
+      - "consumer/**/*"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Display changed files
+        run: |
+          echo "Changed files:"
+          git diff --name-only ${{ github.event.before }} ${{ github.sha }}
